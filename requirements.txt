@@ -3,3 +3,6 @@ numpy
 matplotlib
 scikit-learn>=1.5
 scikit-learn>=1.5
+jupyter
+streamlit
+joblib
