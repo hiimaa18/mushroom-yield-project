@@ -1,3 +1,20 @@
+# Mushroom Yield Project
+
+## Problem Statement
+
+This project predicts mushroom yield using environmental sensor data such as temperature, humidity, and CO₂ levels. The goal is to analyze growing conditions and identify factors that help optimize mushroom production.
+
+## Project Structure
+
+mushroom-yield-project/
+│
+├── data/
+├── models/
+├── notebooks/
+├── src/
+│   └── smoke_test.py
+├── requirements.txt
+└── README.md
 \# Environment Setup
 
 
