@@ -123,5 +123,10 @@ Processed Dataset Export
 * Environmental trend analysis
 * Dashboard visualization
 
+### Output Files
+
+* data/processed/02_cleaned.parquet
+* docs/cleaning_log.md
+
 ## Author
 Hima S
