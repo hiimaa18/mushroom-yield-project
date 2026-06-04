@@ -1,12 +1,21 @@
 import pandas as pd
 
-# Load CSV
+# =========================
+# LOAD CSV
+# =========================
+
 df = pd.read_csv(
-    "data/raw/polyhouse_sensors.csv",
+    "data/raw/polyhouse_logs.csv",
     parse_dates=["timestamp"]
 )
 
-# Print details
+print("Dataset Loaded Successfully!")
+
+# =========================
+# BASIC INSPECTION
+# =========================
+
+print("\nFirst 5 Rows:")
 print(df.head())
 
 print("\nShape:")
@@ -19,15 +28,25 @@ print("\nData Types:")
 print(df.dtypes)
 
 print("\nInfo:")
-print(df.info())
+df.info()
 
-print("\nSummary:")
+print("\nSummary Statistics:")
 print(df.describe())
 
-# Save interim file
+# =========================
+# MISSING VALUES
+# =========================
+
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+# =========================
+# SAVE INTERIM FILE
+# =========================
+
 df.to_csv(
     "data/interim/01_loaded.csv",
     index=False
 )
 
-print("\nFile saved successfully!")
+print("\nInterim file saved successfully!")
