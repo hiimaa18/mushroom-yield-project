@@ -115,6 +115,40 @@ Processed Dataset Export
 
 ---
 
+---
+
+# Task 3 — Exploratory Data Analysis (EDA)
+
+## Objective
+
+Perform exploratory data analysis on the cleaned mushroom polyhouse dataset to identify relationships between environmental variables and mushroom yield.
+
+## Work Completed
+
+* Computed descriptive statistics for:
+
+  * temperature
+  * humidity
+  * CO₂
+  * yield_kg
+* Generated data quality report with:
+
+  * date range
+  * observation count
+  * summary statistics
+  * validity metrics
+* Created visualization figures:
+
+  * correlation heatmap
+  * humidity vs yield scatter plot
+  * temperature vs yield scatter plot
+  * CO₂ vs yield scatter plot
+* Added labeled axes and units to all plots
+* Documented EDA interpretations and modeling insights
+* Exported reports under `reports/`
+
+---
+
 # Future Scope
 
 * Exploratory Data Analysis (EDA)
@@ -125,8 +159,25 @@ Processed Dataset Export
 
 ### Output Files
 
+#### Task 1 Outputs
+
+* requirements.txt
+* src/smoke_test.py
+* README.md
+
+#### Task 2 Outputs
+
 * data/processed/02_cleaned.parquet
 * docs/cleaning_log.md
+* sample_cleaned_data.csv
+
+#### Task 3 Outputs
+
+* reports/eda_summary.md
+* reports/figures/correlation_heatmap.png
+* reports/figures/humidity_vs_yield.png
+* reports/figures/temperature_vs_yield.png
+* reports/figures/co2_vs_yield.png
 
 ## Author
 Hima S
