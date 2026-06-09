@@ -50,6 +50,46 @@ The goal is to understand environmental sensor behavior and evaluate whether the
 
 ---
 
+# Chronological Train/Test Split
+
+To prevent data leakage, the dataset was sorted by timestamp and split chronologically. Earlier observations were used for training and later observations were reserved for testing.
+
+## Split Details
+
+| Metric           | Value                       |
+| ---------------- | --------------------------- |
+| Split Strategy   | Chronological (Time-Series) |
+| Train Size       | 4 rows                      |
+| Test Size        | 2 rows                      |
+| Train Percentage | 80%                         |
+| Test Percentage  | 20%                         |
+
+## Train Period
+
+| Start Date          | End Date            |
+| ------------------- | ------------------- |
+| 2026-06-01 08:00:00 | 2026-06-02 08:00:00 |
+
+## Test Period
+
+| Start Date          | End Date            |
+| ------------------- | ------------------- |
+| 2026-06-02 12:00:00 | 2026-06-02 16:00:00 |
+
+## Scaling Procedure
+
+A MinMaxScaler was fitted using only the training dataset to prevent information leakage from future observations.
+
+The fitted scaler was then used to transform both training and testing feature sets.
+
+## Leakage Prevention Verification
+
+* Dataset sorted by timestamp before splitting.
+* Training observations occur strictly before testing observations.
+* No future information was used when creating features.
+* Test data was transformed using statistics learned from training data only.
+
+
 # Conclusion
 
 The cleaned dataset demonstrates acceptable quality for exploratory analysis and future predictive modeling tasks.
