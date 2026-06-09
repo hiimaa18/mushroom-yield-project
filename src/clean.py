@@ -46,7 +46,7 @@ print(missing_report)
 sensor_columns = ["temperature", "humidity", "co2"]
 
 for col in sensor_columns:
-    df[col] = df[col].fillna(method="ffill")
+    df[col] = df[col].ffill()
 
 # Remove rows where target is missing
 df = df.dropna(subset=["yield_kg"])
