@@ -216,6 +216,104 @@ Scaler saved to:
 
 models/scaler.joblib
 
+# Task 5: Linear Regression Baseline
+
+## Objective
+
+Develop an interpretable baseline model for predicting mushroom yield using environmental sensor data.
+
+---
+
+## Model
+
+Algorithm Used:
+
+* Linear Regression (scikit-learn)
+
+Features:
+
+* temperature
+* humidity
+* co2
+* temp_humidity
+
+Target:
+
+* yield_kg
+
+---
+
+## Model Performance
+
+| Metric | Value |
+| ------ | ----- |
+| MAE    | 0.256 |
+| RMSE   | 0.349 |
+| R²     | 0.598 |
+
+Interpretation:
+
+* MAE indicates the average prediction error is approximately 0.26 kg.
+* RMSE indicates prediction errors remain relatively small.
+* R² ≈ 0.60 suggests the model explains about 60% of the observed variation in mushroom yield.
+
+---
+
+## Coefficient Interpretation
+
+| Feature       | Coefficient |
+| ------------- | ----------- |
+| temperature   | -0.0321     |
+| humidity      | 0.0226      |
+| co2           | -0.7118     |
+| temp_humidity | -0.0916     |
+
+Findings:
+
+* CO₂ showed the strongest influence in the model and was negatively associated with yield.
+* Humidity showed a small positive relationship with yield.
+* Temperature showed a weak negative relationship with yield.
+* The temperature-humidity interaction feature contributed additional environmental information.
+
+Because MinMaxScaler was applied, coefficients represent relative feature influence rather than direct physical unit changes.
+
+---
+
+## Residual Diagnostics
+
+Residuals were calculated as:
+
+Residual = Actual Yield − Predicted Yield
+
+Diagnostic Figures:
+
+* reports/figures/residuals_linear.png
+* reports/figures/residuals_vs_humidity_linear.png
+
+Observations:
+
+* Due to the small dataset size, only limited conclusions can be drawn.
+* No strong evidence of systematic prediction error was observed.
+* Additional data collection is recommended for more reliable diagnostics.
+
+---
+
+## Model Artifacts
+
+Saved Files:
+
+* models/linear_regression.joblib
+* reports/linear_metrics.json
+* reports/linear_diagnostics.md
+
+---
+
+## Recommendation
+
+Linear Regression serves as a useful baseline model because it is simple and interpretable.
+
+Future work should evaluate Random Forest Regression and other nonlinear models to determine whether more complex relationships exist between environmental conditions and mushroom yield.
+
 
 ## Author
 Hima S
