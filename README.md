@@ -179,5 +179,43 @@ Perform exploratory data analysis on the cleaned mushroom polyhouse dataset to i
 * reports/figures/temperature_vs_yield.png
 * reports/figures/co2_vs_yield.png
 
+## Task 4: Feature Engineering & Temporal Train/Test Split
+
+### Features
+
+* temperature
+* humidity
+* co2
+* temp_humidity = temperature × humidity
+
+Target:
+
+* yield_kg
+
+### Chronological Split
+
+Train Period:
+2026-06-01 08:00:00 → 2026-06-02 08:00:00
+
+Test Period:
+2026-06-02 12:00:00 → 2026-06-02 16:00:00
+
+Train Rows: 4
+
+Test Rows: 2
+
+### Scaling
+
+MinMaxScaler was fitted using training data only.
+
+Training data was transformed using fit_transform().
+
+Test data was transformed using transform() using statistics learned from the training set.
+
+Scaler saved to:
+
+models/scaler.joblib
+
+
 ## Author
 Hima S
