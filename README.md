@@ -179,7 +179,11 @@ Perform exploratory data analysis on the cleaned mushroom polyhouse dataset to i
 * reports/figures/temperature_vs_yield.png
 * reports/figures/co2_vs_yield.png
 
-## Task 4: Feature Engineering & Temporal Train/Test Split
+---
+
+---
+
+# Task 4 — Feature Engineering & Temporal Train/Test Split
 
 ### Features
 
@@ -216,7 +220,11 @@ Scaler saved to:
 
 models/scaler.joblib
 
-# Task 5: Linear Regression Baseline
+---
+
+---
+
+# Task 5 — Linear Regression Baseline
 
 ## Objective
 
@@ -313,6 +321,82 @@ Saved Files:
 Linear Regression serves as a useful baseline model because it is simple and interpretable.
 
 Future work should evaluate Random Forest Regression and other nonlinear models to determine whether more complex relationships exist between environmental conditions and mushroom yield.
+
+---
+
+---
+
+# Task 6 — Random Forest and Time-Series Cross Validation
+
+## Random Forest Performance
+
+The Random Forest Regressor was trained using the same chronological train-test split used for the Linear Regression baseline.
+
+Performance Results:
+
+| Model             | MAE   | RMSE  | R²    |
+| ----------------- | ----- | ----- | ----- |
+| Linear Regression | 0.256 | 0.349 | 0.598 |
+| Random Forest     | 0.385 | 0.385 | 0.511 |
+
+The Random Forest model did not outperform the Linear Regression baseline on the available dataset.
+
+---
+
+## Feature Importance
+
+Feature importance analysis was performed using the trained Random Forest model.
+
+The feature importance plot was saved as:
+
+reports/figures/rf_feature_importance.png
+
+Feature importance values indicate which environmental variables contributed most to model decisions.
+
+Unlike linear regression coefficients, feature importance does not indicate positive or negative relationships; it only reflects relative predictive influence.
+
+---
+
+## TimeSeriesSplit Cross Validation
+
+A TimeSeriesSplit strategy was used to preserve temporal ordering during cross-validation.
+
+Cross-Validated MAE Results:
+
+| Model             | Fold 1 | Fold 2 | Fold 3 | Average MAE |
+| ----------------- | ------ | ------ | ------ | ----------- |
+| Linear Regression | 0.3000 | 0.3054 | 0.1771 | 0.2608      |
+| Random Forest     | 0.3000 | 0.4660 | 0.0720 | 0.2793      |
+
+No test data was used during cross-validation.
+
+---
+
+## Overfitting Assessment
+
+Linear Regression:
+
+* CV MAE = 0.2608
+* Test MAE = 0.2560
+
+The close agreement between CV and test performance suggests stable generalization.
+
+Random Forest:
+
+* CV MAE = 0.2793
+* Test MAE = 0.3850
+
+The increase in test error compared to CV error suggests mild overfitting or instability due to the limited dataset size.
+
+---
+
+## Conclusion
+
+Linear Regression remains the preferred model for the current dataset because it achieved better predictive performance and greater stability.
+
+Random Forest introduces additional complexity but did not provide sufficient improvement to justify replacing the baseline model.
+
+Future work should focus on collecting additional observations and performing systematic hyperparameter tuning before re-evaluating Random Forest performance.
 
 
 ## Author
