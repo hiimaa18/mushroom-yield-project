@@ -1,90 +1,101 @@
-import os
 import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
 import joblib
 
-from sklearn.preprocessing import MinMaxScaler
-
 # Load dataset
-df = pd.read_csv("sample_cleaned_data.csv")
+df = pd.read_parquet(
+    "data/processed/02_cleaned.parquet"
+)
+
+print(df.columns)
 
 # Convert timestamp
-df["timestamp"] = pd.to_datetime(df["timestamp"])
+df["timestamp"] = pd.to_datetime(
+    df["timestamp"]
+)
 
 # Sort chronologically
 df = df.sort_values("timestamp")
 
-# Create feature
-df["temp_humidity"] = (
-    df["temperature"] *
-    df["humidity"]
+print(df["timestamp"].head())
+print(df["timestamp"].tail())
+
+# 80/20 split
+split_idx = int(len(df) * 0.8)
+
+train_df = df.iloc[:split_idx].copy()
+test_df = df.iloc[split_idx:].copy()
+
+print("Train size:", len(train_df))
+print("Test size:", len(test_df))
+
+print("Train starts:",
+      train_df["timestamp"].min())
+
+print("Train ends:",
+      train_df["timestamp"].max())
+
+print("Test starts:",
+      test_df["timestamp"].min())
+
+print("Test ends:",
+      test_df["timestamp"].max())
+
+assert (
+    train_df["timestamp"].max()
+    <
+    test_df["timestamp"].min()
+)
+
+# Feature engineering
+train_df["temp_humidity_interaction"] = (
+    train_df["temperature"] *
+    train_df["humidity"]
+)
+
+test_df["temp_humidity_interaction"] = (
+    test_df["temperature"] *
+    test_df["humidity"]
 )
 
 # Features
-X = df[
-    [
-        "temperature",
-        "humidity",
-        "co2",
-        "temp_humidity"
-    ]
+features = [
+    "temperature",
+    "humidity",
+    "co2",
+    "temp_humidity_interaction"
 ]
 
+X_train = train_df[features]
+X_test = test_df[features]
+
 # Target
-y = df["yield_kg"]
+y_train = train_df["yield_kg"]
+y_test = test_df["yield_kg"]
 
-# 80/20 chronological split
-split_index = int(len(df) * 0.8)
-
-X_train = X.iloc[:split_index]
-X_test = X.iloc[split_index:]
-
-y_train = y.iloc[:split_index]
-y_test = y.iloc[split_index:]
-
-# Dates
-train_start = df.iloc[0]["timestamp"]
-train_end = df.iloc[split_index - 1]["timestamp"]
-
-test_start = df.iloc[split_index]["timestamp"]
-test_end = df.iloc[-1]["timestamp"]
-
-print("\nTrain Period:")
-print(train_start, "to", train_end)
-
-print("\nTest Period:")
-print(test_start, "to", test_end)
-
-# Fit scaler ONLY on train
+# Scaling
 scaler = MinMaxScaler()
 
-X_train_scaled = scaler.fit_transform(X_train)
+X_train_scaled = scaler.fit_transform(
+    X_train
+)
 
-# Transform test
-X_test_scaled = scaler.transform(X_test)
+X_test_scaled = scaler.transform(
+    X_test
+)
 
-# Back to DataFrames
+# Convert back to DataFrames
 X_train_scaled = pd.DataFrame(
     X_train_scaled,
-    columns=X.columns
+    columns=features
 )
 
 X_test_scaled = pd.DataFrame(
     X_test_scaled,
-    columns=X.columns
+    columns=features
 )
 
-# Save folders
-os.makedirs(
-    "data/processed",
-    exist_ok=True
-)
-
-os.makedirs(
-    "models",
-    exist_ok=True
-)
-
-# Save splits
+# Save processed files
 X_train_scaled.to_csv(
     "data/processed/X_train.csv",
     index=False
@@ -105,13 +116,24 @@ y_test.to_csv(
     index=False
 )
 
+# Save train/test datasets
+train_df.to_csv(
+    "data/processed/train.csv",
+    index=False
+)
+
+test_df.to_csv(
+    "data/processed/test.csv",
+    index=False
+)
+
 # Save scaler
 joblib.dump(
     scaler,
-    "models/minmax_scaler.pkl"
+    "data/processed/minmax_scaler.pkl"
 )
 
-print("\nTrain Size:", len(X_train))
-print("Test Size:", len(X_test))
-
-print("\nFiles Saved Successfully!")
+print("\nChronological split complete")
+print("Train CSV saved")
+print("Test CSV saved")
+print("Scaler saved")

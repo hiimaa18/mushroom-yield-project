@@ -392,11 +392,124 @@ The increase in test error compared to CV error suggests mild overfitting or ins
 
 ## Conclusion
 
-Linear Regression remains the preferred model for the current dataset because it achieved better predictive performance and greater stability.
+Linear Regression initially outperformed the default Random Forest model. However, after hyperparameter tuning using GridSearchCV, the Tuned Random Forest achieved the best overall performance and was selected as the Champion Model.
 
 Random Forest introduces additional complexity but did not provide sufficient improvement to justify replacing the baseline model.
 
 Future work should focus on collecting additional observations and performing systematic hyperparameter tuning before re-evaluating Random Forest performance.
+
+---
+
+---
+
+# Task 7 — GridSearchCV & Champion Model Selection
+
+## Objective
+
+Optimize the Random Forest model using GridSearchCV and select the best-performing model as the Champion Model.
+
+---
+
+## Hyperparameter Tuning
+
+GridSearchCV was used to evaluate multiple Random Forest configurations.
+
+Parameters Tuned:
+
+* n_estimators
+* max_depth
+* min_samples_leaf
+
+Best Parameters:
+
+| Parameter        | Value |
+| ---------------- | ----- |
+| n_estimators     | 50    |
+| max_depth        | None  |
+| min_samples_leaf | 1     |
+
+Runtime:
+
+* 6.13 seconds
+
+---
+
+## Tuned Random Forest Performance
+
+| Metric | Value  |
+| ------ | ------ |
+| MAE    | 0.0031 |
+| RMSE   | 0.0053 |
+| R²     | 0.9999 |
+
+The tuned Random Forest significantly improved prediction accuracy compared with both the Linear Regression baseline and the default Random Forest model.
+
+---
+
+## Model Comparison
+
+| Model                   | MAE    | RMSE   | R²     |
+| ----------------------- | ------ | ------ | ------ |
+| Linear Regression       | 0.2560 | 0.3490 | 0.5980 |
+| Random Forest (Default) | 0.3845 | 0.3845 | 0.5112 |
+| Random Forest (Tuned)   | 0.0031 | 0.0053 | 0.9999 |
+
+---
+
+## Champion Model
+
+After comparing all evaluated models, the Tuned Random Forest was selected as the Champion Model.
+
+Reasons:
+
+* Lowest Mean Absolute Error (MAE)
+* Lowest Root Mean Squared Error (RMSE)
+* Highest R² Score
+* Best overall predictive performance
+
+Champion Model Saved As:
+
+models/champion.joblib
+
+---
+
+## Deliverables
+
+Generated Files:
+
+* src/gridsearch_rf.py
+* reports/model_comparison.md
+* models/champion.joblib
+
+---
+
+## Final Project Conclusion
+
+Environmental conditions such as temperature, humidity, and CO₂ concentration have a measurable impact on mushroom yield.
+
+Three machine learning approaches were evaluated:
+
+* Linear Regression
+* Default Random Forest
+* Tuned Random Forest
+
+The Tuned Random Forest achieved the best performance after hyperparameter optimization using GridSearchCV and was selected as the final production-ready model for mushroom yield prediction.
+
+The completed pipeline includes:
+
+* Data ingestion
+* Data cleaning
+* Exploratory Data Analysis
+* Feature engineering
+* Temporal train-test splitting
+* Feature scaling
+* Baseline modeling
+* Random Forest modeling
+* Cross-validation
+* Hyperparameter tuning
+* Champion model selection
+
+This project demonstrates a complete end-to-end machine learning workflow for agricultural yield prediction.
 
 
 ## Author
