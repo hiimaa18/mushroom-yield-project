@@ -621,6 +621,112 @@ Predicted Yield: 12.22 kg
 
 The Streamlit application successfully integrates the trained machine learning pipeline into an interactive forecasting tool. Users can adjust environmental conditions and instantly obtain predicted mushroom yield values, making the model accessible for practical decision support.
 
+---
+
+---
+
+# Task 9 —  Cloud Deployment & Monitoring
+
+## Objective
+
+Deploy the mushroom yield prediction application to the cloud and establish a lightweight monitoring strategy for future maintenance and model improvement.
+
+---
+
+## Cloud Deployment
+
+The Streamlit application was deployed using Streamlit Community Cloud.
+
+Deployment Process:
+
+1. Project repository pushed to GitHub.
+2. Streamlit Community Cloud connected to the GitHub repository.
+3. Application entry point configured as `app.py`.
+4. Required dependencies specified in `requirements.txt`.
+5. Python runtime version configured using `runtime.txt`.
+6. Application successfully deployed and made publicly accessible.
+
+---
+
+## Model Artifacts
+
+The following artifacts are loaded during deployment:
+
+* `models/champion.joblib`
+* `models/minmax_scaler.pkl`
+* `models/feature_cols.json`
+
+These artifacts ensure that the deployed application uses the same preprocessing and prediction pipeline developed during model training.
+
+---
+
+## Prediction Workflow
+
+The deployed application performs the following steps:
+
+1. Accept environmental sensor inputs.
+
+2. Generate engineered feature:
+
+   `temp_humidity = temperature × humidity`
+
+3. Arrange features in training order.
+
+4. Apply MinMax scaling.
+
+5. Load champion model.
+
+6. Generate yield prediction.
+
+7. Display predicted mushroom yield in kilograms.
+
+---
+
+## Monitoring Strategy
+
+A lightweight monitoring plan was designed to track model usage and prediction quality.
+
+### Logged Information
+
+* Timestamp
+* Temperature
+* Humidity
+* CO₂ concentration
+* Predicted yield
+
+### Example Log
+
+| Timestamp  | Temperature | Humidity | CO₂     | Predicted Yield |
+| ---------- | ----------- | -------- | ------- | --------------- |
+| 2026-06-19 | 25°C        | 88%      | 720 ppm | 12.22 kg        |
+
+---
+
+## Retraining Triggers
+
+The model should be retrained when:
+
+* Significant new cultivation data becomes available.
+* Environmental conditions change substantially.
+* Prediction accuracy decreases.
+* Sensor values frequently fall outside the original training range.
+* Seasonal cultivation patterns change.
+
+---
+
+## Deployment Benefits
+
+* Accessible from any device with internet access.
+* No local Python installation required for users.
+* Real-time yield forecasting.
+* Easy future model updates through GitHub integration.
+
+---
+
+## Conclusion
+
+The mushroom yield prediction system was successfully deployed to the cloud using Streamlit Community Cloud. A monitoring strategy was established to support future model maintenance, retraining decisions, and long-term reliability of the forecasting application.
+
 
 ## Author
 Hima S
