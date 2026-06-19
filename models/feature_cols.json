@@ -2,5 +2,5 @@
     "temperature",
     "humidity",
     "co2",
-    "temp_humidity_interaction"
+    "temp_humidity"
 ]
