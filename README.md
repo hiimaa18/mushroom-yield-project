@@ -511,6 +511,116 @@ The completed pipeline includes:
 
 This project demonstrates a complete end-to-end machine learning workflow for agricultural yield prediction.
 
+---
+
+---
+
+# Task 8 — Streamlit Yield Forecast App
+
+## Objective
+
+Develop an interactive Streamlit web application that allows users to predict mushroom yield based on environmental sensor readings.
+
+---
+
+## Features
+
+The application provides:
+
+* Temperature input slider (°C)
+* Humidity input slider (%)
+* CO₂ input slider (ppm)
+* Real-time mushroom yield prediction
+* User-friendly web interface
+
+---
+
+## Model Used
+
+Champion Model:
+
+* Linear Regression
+
+Artifacts Loaded:
+
+* models/champion.joblib
+* models/minmax_scaler.pkl
+* models/feature_cols.json
+
+---
+
+## Prediction Pipeline
+
+The application performs the following steps:
+
+1. Accept sensor inputs from the user.
+
+2. Create the engineered feature:
+
+   temp_humidity = temperature × humidity
+
+3. Arrange features in the same order used during training.
+
+4. Apply MinMax scaling using the saved scaler.
+
+5. Load the champion model.
+
+6. Generate mushroom yield prediction.
+
+7. Display the result in kilograms.
+
+---
+
+## Running the Application
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run Streamlit:
+
+```bash
+streamlit run app.py
+```
+
+or
+
+```bash
+python -m streamlit run app.py
+```
+
+---
+
+## Example Prediction
+
+Input:
+
+* Temperature = 25°C
+* Humidity = 88%
+* CO₂ = 720 ppm
+
+Output:
+
+Predicted Yield: 12.22 kg
+
+---
+
+## Deliverables
+
+* app.py
+* champion.joblib
+* minmax_scaler.pkl
+* feature_cols.json
+* Streamlit UI Screenshot
+
+---
+
+## Conclusion
+
+The Streamlit application successfully integrates the trained machine learning pipeline into an interactive forecasting tool. Users can adjust environmental conditions and instantly obtain predicted mushroom yield values, making the model accessible for practical decision support.
+
 
 ## Author
 Hima S
