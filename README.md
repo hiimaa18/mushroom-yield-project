@@ -722,6 +722,29 @@ The model should be retrained when:
 * Easy future model updates through GitHub integration.
 
 ---
+## Deployment Validation
+
+The deployed application was tested using sample environmental inputs.
+
+Test Scenario:
+
+| Temperature | Humidity | CO₂ | Predicted Yield |
+|------------|----------|-----|----------------|
+| 25 | 88 | 720 | 12.22 kg |
+| 24 | 85 | 700 | 11.95 kg |
+| 26 | 90 | 750 | 12.80 kg |
+
+The deployed application successfully generated predictions and matched local model behavior.
+
+---
+
+## Deployment Link
+
+Streamlit Cloud URL:
+
+https://mushroom-yield-project-dqtxvblidfpwqwx4nygefe.streamlit.app/
+
+---
 
 ## Conclusion
 
